@@ -11,8 +11,11 @@ public class EnemyMoving : SaiBehavior
     public Point PointToGo => pointToGo;
     [SerializeField] protected EnemyCtrl ctrl;
     [SerializeField] protected bool IsWalking = true;
+    [SerializeField] protected bool IsIdle = true;
+    [SerializeField] protected bool IsAttack = true;
+    [SerializeField] protected float stopDistanceAttack = 1.5f;
     [SerializeField] protected float targetDistance = 0f;
-    [SerializeField] protected float stopDistance = 1f;
+    [SerializeField] protected float stopDistance = 2f;
     [SerializeField] protected bool isReachTarget = false;
 
 
@@ -41,6 +44,8 @@ public class EnemyMoving : SaiBehavior
         this.ctrl = transform.parent.GetComponent<EnemyCtrl>();
         Debug.LogWarning(transform.name + ":LoadEnemyCtrl", gameObject);
 
+        this.ctrl.Agent.stoppingDistance = this.stopDistanceAttack;
+
     }
 
     //protected virtual void LoadTarget()
@@ -58,12 +63,12 @@ public class EnemyMoving : SaiBehavior
         if(this.pointToGo == null) return;
         Vector3 postion = this.pointToGo.transform.position;
 
-        this.targetDistance = Vector3.Distance(transform.position, this.pointToGo.transform.position);
-        if (this.targetDistance < this.stopDistance)
+        this.targetDistance = Vector3.Distance(transform.position,  this.pointToGo.transform.position);
+        if (this.targetDistance <= this.stopDistance)
         {
             this.ctrl.Agent.isStopped = true;
-            this.LoadNextPoint();
-        }
+            //this.LoadNextPoint();
+        } 
         else
         {
             this.ctrl.Agent.isStopped = false;
@@ -76,6 +81,27 @@ public class EnemyMoving : SaiBehavior
     {
         this.IsWalking = !this.ctrl.Agent.isStopped;
         this.ctrl.Animator.SetBool("IsWalking", this.IsWalking);
+
+
+        this.IsIdle = !this.IsWalking && !this.IsAttack;
+        this.ctrl.Animator.SetBool("Idle", this.IsIdle);
+
+        this.UpdateAttackState();
+
+
+    }
+    protected virtual void UpdateAttackState()
+    {
+        if (this.targetDistance < this.stopDistanceAttack)
+        {
+            this.IsAttack = true;
+        }
+        else
+        {
+            this.IsAttack = false;
+        }
+
+        this.ctrl.Animator.SetBool("IsAttack", this.IsAttack);
     }
 
     protected virtual void LoadNextPoint()

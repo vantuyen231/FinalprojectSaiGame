@@ -6,10 +6,13 @@ public class EnemyCtrl : SaiBehavior
 {
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected DamageReceiver damageReceiver;
+
 
     public NavMeshAgent Agent => agent;
     public Animator Animator => animator;
 
+    public DamageReceiver DamageReceiver => damageReceiver;
 
     int currentHp = 10;
     public float weight = 1f;
@@ -26,6 +29,7 @@ public class EnemyCtrl : SaiBehavior
         base.LoadComponents();
         this.LoadAgent();
         this.LoadAnimator();
+        this.LoadDamageReceiver();
     }
 
     protected virtual void LoadAgent()
@@ -36,6 +40,16 @@ public class EnemyCtrl : SaiBehavior
         }
         this.agent = this.GetComponent<NavMeshAgent>();
         Debug.LogWarning(transform.name + ":LoadAgent", gameObject);
+    }
+
+    protected virtual void LoadDamageReceiver()
+    {
+        if (this.damageReceiver != null)
+        {
+            return;
+        }
+        this.damageReceiver = this.GetComponentInChildren<DamageReceiver>();
+        Debug.LogWarning(transform.name + ":LoadDamageReceiver", gameObject);
     }
     protected virtual void LoadAnimator()
     {

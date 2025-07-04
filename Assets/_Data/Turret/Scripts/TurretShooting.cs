@@ -10,7 +10,7 @@ public class TurretShooting : SaiBehavior
     [SerializeField] protected float shootSpeed = 1f;
     [SerializeField] protected int currentFirePoint = 0;
 
-    public Transform bulletPrefab;
+    public BulletCtrl bulletPrefab;
 
 
 
@@ -29,7 +29,7 @@ public class TurretShooting : SaiBehavior
     protected virtual void Looking()
     {
         if (this.target == null) return;
-        Vector3 directionToTarget = this.target.transform.position - this.ctrl.Rotator.position;
+        Vector3 directionToTarget = this.target.transform.position - this.ctrl.Rotator.position-Vector3.up * 1.0f;
         Vector3 newDirection = Vector3.RotateTowards(
             this.ctrl.Rotator.forward, directionToTarget, rotationSpeed * Time.deltaTime, 0.0f);
         this.ctrl.Rotator.rotation = Quaternion.LookRotation(newDirection);
@@ -64,8 +64,13 @@ public class TurretShooting : SaiBehavior
 
         Vector3 rotarionDirection = this.ctrl.Rotator.transform.forward;
 
-        Transform newBullet = Instantiate(this.bulletPrefab, firePoint.transform.position, Quaternion.identity);
-        newBullet.rotation = Quaternion.LookRotation(rotarionDirection.normalized);
+        //Transform newBullet = Instantiate(this.bulletPrefab, firePoint.transform.position, Quaternion.identity);
+        //newBullet.rotation = Quaternion.LookRotation(rotarionDirection.normalized);
+
+        BulletCtrl newBullet = BulletSpawnerCtrl.Instance.Spawner.Spawn(this.bulletPrefab, firePoint.transform.position);
+        newBullet.transform.rotation = Quaternion.LookRotation(rotarionDirection.normalized);
+
+        newBullet.SetActive(true);
     }
 
     protected virtual FirePoint GetFirePoint()
