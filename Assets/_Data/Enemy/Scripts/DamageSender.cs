@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DamageSender : SaiBehavior
+public abstract  class DamageSender : SaiBehavior
 {
     [SerializeField] protected int damage = 1;
 
@@ -9,5 +9,6 @@ public class DamageSender : SaiBehavior
     {
         return this.damage;
     }
+    public abstract void Despawn();
 
 }

@@ -25,7 +25,7 @@ public class EnemiesSpawning : SaiBehavior
         Debug.LogWarning(transform.name + ":EnemiesSpawnerCtrl", gameObject);
     }
 
-protected virtual void Spawning()
+    protected virtual void Spawning()
     {
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.delay) return;

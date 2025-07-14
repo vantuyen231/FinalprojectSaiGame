@@ -18,7 +18,7 @@ public class BulletDamageSender : DamageSender
         Debug.LogWarning(transform.name + ": LoadBulletCtrl", gameObject);
     }
 
-    public virtual void Despawn()
+    public override void Despawn()
     {
         this.ctrl.Despawn.DoDespawn();
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesSpawnerCtrl : SaiSingleton<EnemiesSpawner>
+public class EnemiesSpawnerCtrl : SaiSingleton<EnemiesSpawnerCtrl>
 {
     [SerializeField] protected EnemiesSpawner spawner;
     public EnemiesSpawner Spawner => spawner;

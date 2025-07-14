@@ -27,9 +27,46 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.ctrl.Animator.SetBool("IsAlive", this.isAlive);
     }
+    protected override void Reborn()
+    {
+        base.Reborn(); 
+        this.isAlive = true;
+
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = true;
+
+        this.ctrl.Animator.SetBool("IsAlive", true);
+        this.ctrl.ResetModelRotation();
+
+    }
     public override void IsHit()
     {
-        this.ctrl.Animator.SetTrigger("IsHit");
+        //this.ctrl.Animator.SetTrigger("IsHit");
     }
 
+    protected override void OnDead()
+    {
+        base.OnDead();
+        //this.DropItems();
+        Invoke(nameof(this.Despawn), 12f);
+    }
+
+    //protected override void OnDead()
+    //{
+    //    this.ctrl.Animator.SetBool("IsAlive", false);
+
+    //    Collider col = GetComponent<Collider>();
+    //    if (col != null) col.enabled = false;
+
+    //    Invoke(nameof(DespawnEnemy), 5f);
+    //}
+
+    //protected virtual void DespawnEnemy()
+    //{
+    //    EnemiesSpawnerCtrl.Instance.Spawner.Despawn(this.ctrl);
+    //}
+    protected virtual void Despawn()
+    {
+        this.ctrl.Despawn.DoDespawn();
+    }
 }

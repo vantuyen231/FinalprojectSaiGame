@@ -23,14 +23,18 @@ public class DamageReceiver : SaiBehavior
 
     protected virtual void ApplyDamage(Collider trigger)
     {
-        //DamageSender damageSender = trigger.GetComponent<DamageSender>();
-        BulletDamageSender damageSender = trigger.GetComponent<BulletDamageSender>();
+        if (!this.IsAlive()) return;
+        DamageSender damageSender = trigger.GetComponent<DamageSender>();
+        //damageSender = trigger.GetComponent<DamageSender>();
+        //BulletDamageSender damageSender = trigger.GetComponent<BulletDamageSender>();
         if (damageSender == null) return;
         damageSender.Despawn();
         this.Deduct(damageSender.GetDamage());
         this.IsHit();
-        this.IsAlive();
-
+        if (!this.IsAlive())
+        {
+            this.OnDead();
+        }
     }
 
     public virtual void Deduct(int damage)
@@ -46,11 +50,19 @@ public class DamageReceiver : SaiBehavior
 
     public virtual bool IsAlive()
     {
-        if (this.currentHp <= 0) this.isAlive = false;
+        if (this.currentHp <= 0)
+        {
+            this.isAlive = false;
+            //this.OnDead();
+        }
         else this.isAlive = true;
         return this.isAlive;
     }
     public virtual void IsHit()
+    {
+
+    }
+    protected virtual void OnDead()
     {
 
     }

@@ -7,6 +7,8 @@ public class EnemyCtrl : PoolObj
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Animator animator;
     [SerializeField] protected DamageReceiver damageReceiver;
+    [SerializeField] protected Transform modelTransform;
+
 
 
     public NavMeshAgent Agent => agent;
@@ -57,7 +59,14 @@ public class EnemyCtrl : PoolObj
         {
             return;
         }
-        this.animator = this.transform.Find("Model").GetComponent<Animator>();
+        //this.animator = this.transform.Find("Model").GetComponent<Animator>();
+        //Debug.LogWarning(transform.name + ":LoadAnimator", gameObject);
+        this.modelTransform = this.transform.Find("Model");
+        if (this.modelTransform != null)
+        {
+            this.animator = this.modelTransform.GetComponent<Animator>();
+        }
+
         Debug.LogWarning(transform.name + ":LoadAnimator", gameObject);
     }
 
@@ -85,5 +94,14 @@ public class EnemyCtrl : PoolObj
     public override string GetName()
     {
         return "Enemy";
+    }
+
+    public void ResetModelRotation()
+    {
+        if (this.modelTransform != null)
+        {
+            this.modelTransform.localPosition = Vector3.zero;
+            this.modelTransform.localRotation = Quaternion.identity;
+        }
     }
 }

@@ -60,21 +60,26 @@ public class EnemyMoving : SaiBehavior
 
     protected virtual void MoveToTarget()
     {
-        if(this.pointToGo == null) return;
+        if (!this.CanMove())
+        {
+            this.StopMoving();
+            return;
+        }
         Vector3 postion = this.pointToGo.transform.position;
 
         this.targetDistance = Vector3.Distance(transform.position,  this.pointToGo.transform.position);
         if (this.targetDistance <= this.stopDistance)
         {
             this.ctrl.Agent.isStopped = true;
-            //this.LoadNextPoint();
-        } 
+            this.ctrl.Agent.SetDestination(postion);
+
+        }
         else
         {
             this.ctrl.Agent.isStopped = false;
             this.ctrl.Agent.SetDestination(postion);
         }
-        this.ctrl.Agent.SetDestination(postion);
+        //this.ctrl.Agent.SetDestination(postion);
     }
 
     protected virtual void UpdateAnimator()
@@ -83,8 +88,8 @@ public class EnemyMoving : SaiBehavior
         this.ctrl.Animator.SetBool("IsWalking", this.IsWalking);
 
 
-        this.IsIdle = !this.IsWalking && !this.IsAttack;
-        this.ctrl.Animator.SetBool("Idle", this.IsIdle);
+        //this.IsIdle = !this.IsWalking && !this.IsAttack;
+        //this.ctrl.Animator.SetBool("Idle", this.IsIdle);
 
         this.UpdateAttackState();
 
@@ -104,10 +109,17 @@ public class EnemyMoving : SaiBehavior
         this.ctrl.Animator.SetBool("IsAttack", this.IsAttack);
     }
 
-    protected virtual void LoadNextPoint()
+    protected virtual bool CanMove()
     {
-        this.pointToGo = this.pointToGo.NextPoint;
-        Debug.Log("pointToGo:" + this.pointToGo);
+        bool canMove = true;
+        if (this.pointToGo == null) canMove = false;
+        if (this.ctrl.DamageReceiver != null && !this.ctrl.DamageReceiver.IsAlive()) canMove = false;
 
+        return canMove;
+    }
+
+    protected virtual void StopMoving()
+    {
+        this.ctrl.Agent.isStopped = true;
     }
 }
