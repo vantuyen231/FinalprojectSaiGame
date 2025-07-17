@@ -7,8 +7,10 @@ public class DamageReceiver : SaiBehavior
     [Header("Damage Receiver")]
     [SerializeField] protected int currentHp = 10;
     public int CurrentHp => currentHp;
+
     [SerializeField] protected int maxHp = 7;
     public int MaxHp => maxHp;
+
     [SerializeField] protected bool isAlive = true;
 
     protected virtual void OnEnable()

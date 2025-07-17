@@ -6,7 +6,7 @@ public class EnemyCtrl : PoolObj
 {
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected DamageReceiver damageReceiver;
+    [SerializeField] protected EnemyDamageReceiver damageReceiver;
     [SerializeField] protected Transform modelTransform;
 
 
@@ -14,7 +14,7 @@ public class EnemyCtrl : PoolObj
     public NavMeshAgent Agent => agent;
     public Animator Animator => animator;
 
-    public DamageReceiver DamageReceiver => damageReceiver;
+    public EnemyDamageReceiver DamageReceiver => damageReceiver;
 
     int currentHp = 10;
     public float weight = 1f;
@@ -50,7 +50,7 @@ public class EnemyCtrl : PoolObj
         {
             return;
         }
-        this.damageReceiver = this.GetComponentInChildren<DamageReceiver>();
+        this.damageReceiver = this.GetComponentInChildren<EnemyDamageReceiver>();
         Debug.LogWarning(transform.name + ":LoadDamageReceiver", gameObject);
     }
     protected virtual void LoadAnimator()

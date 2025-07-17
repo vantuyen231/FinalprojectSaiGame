@@ -7,7 +7,7 @@ public class PlayerAiming : PlayerAbstract
     protected float closeLookDistance = 0.6f;
     protected float farLookDistance = 1.3f;
 
-    private void LateUpdate()
+    private void Update()
     {
         this.Aiming();
     }

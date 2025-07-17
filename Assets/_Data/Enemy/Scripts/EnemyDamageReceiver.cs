@@ -47,24 +47,33 @@ public class EnemyDamageReceiver : DamageReceiver
     protected override void OnDead()
     {
         base.OnDead();
-        //this.DropItems();
+        this.DropItems();
         Invoke(nameof(this.Despawn), 12f);
     }
 
-    //protected override void OnDead()
-    //{
-    //    this.ctrl.Animator.SetBool("IsAlive", false);
+    protected virtual void DropItems()
+    {
+        //this.DropItem(ItemCode.Gold);
+        //this.DropItem(ItemCode.PlayerExp);
+        ItemCode itemCode = ItemCode.Gold;
+        InventoryManager.Instance.AddItem(itemCode, 1);
+    }
 
-    //    Collider col = GetComponent<Collider>();
-    //    if (col != null) col.enabled = false;
+    protected virtual void DropItem(ItemCode itemCode)
+    {
+        //ItemDropCtrl prefab = ItemDropSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName(itemCode.ToString());
+        //ItemDropCtrl newItemDrop = ItemDropSpawnerCtrl.Instance.Spawner.Spawn(prefab);
 
-    //    Invoke(nameof(DespawnEnemy), 5f);
-    //}
+        //Vector3 dropPosition = transform.position;
+        //dropPosition.y += 2;
+        //newItemDrop.transform.position = dropPosition;
+        //newItemDrop.SetActive(true);
 
-    //protected virtual void DespawnEnemy()
-    //{
-    //    EnemiesSpawnerCtrl.Instance.Spawner.Despawn(this.ctrl);
-    //}
+        //Vector3 randomDirection = Random.onUnitSphere;
+        //randomDirection.y = Mathf.Abs(randomDirection.y);
+        //newItemDrop.Rigidbody.AddForce(randomDirection * forceAmount, ForceMode.Impulse);
+
+    }
     protected virtual void Despawn()
     {
         this.ctrl.Despawn.DoDespawn();
