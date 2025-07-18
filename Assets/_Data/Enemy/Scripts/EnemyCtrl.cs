@@ -4,16 +4,17 @@ using UnityEngine.AI;
 
 public class EnemyCtrl : PoolObj
 {
+    [Header("Enemy")]
+    [SerializeField] protected Transform model;
+
+
     [SerializeField] protected NavMeshAgent agent;
-    [SerializeField] protected Animator animator;
-    [SerializeField] protected EnemyDamageReceiver damageReceiver;
-    [SerializeField] protected Transform modelTransform;
-
-
-
     public NavMeshAgent Agent => agent;
+
+    [SerializeField] protected Animator animator;
     public Animator Animator => animator;
 
+    [SerializeField] protected EnemyDamageReceiver damageReceiver;
     public EnemyDamageReceiver DamageReceiver => damageReceiver;
 
     int currentHp = 10;
@@ -24,6 +25,11 @@ public class EnemyCtrl : PoolObj
     {
         base.Awake();
         this.RandomWeight();
+    }
+
+    protected virtual void OnEnable()
+    {
+        this.Reborn();
     }
 
     protected override void LoadComponents()
@@ -55,19 +61,10 @@ public class EnemyCtrl : PoolObj
     }
     protected virtual void LoadAnimator()
     {
-        if (this.animator != null)
-        {
-            return;
-        }
-        //this.animator = this.transform.Find("Model").GetComponent<Animator>();
-        //Debug.LogWarning(transform.name + ":LoadAnimator", gameObject);
-        this.modelTransform = this.transform.Find("Model");
-        if (this.modelTransform != null)
-        {
-            this.animator = this.modelTransform.GetComponent<Animator>();
-        }
-
-        Debug.LogWarning(transform.name + ":LoadAnimator", gameObject);
+        if (this.animator != null) return;
+        this.model = transform.Find("Model");
+        if (this.model != null) this.animator = this.model.GetComponent<Animator>();
+        Debug.LogWarning(transform.name + ": LoadAnimator", gameObject);
     }
 
     bool IsDead()
@@ -96,12 +93,9 @@ public class EnemyCtrl : PoolObj
         return "Enemy";
     }
 
-    public void ResetModelRotation()
+    protected virtual void Reborn()
     {
-        if (this.modelTransform != null)
-        {
-            this.modelTransform.localPosition = Vector3.zero;
-            this.modelTransform.localRotation = Quaternion.identity;
-        }
+        this.model.localPosition = Vector3.zero;
+        this.model.localRotation = Quaternion.identity;
     }
 }

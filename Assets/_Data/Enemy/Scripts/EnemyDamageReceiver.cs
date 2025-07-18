@@ -6,6 +6,8 @@ public class EnemyDamageReceiver : DamageReceiver
 {
     [Header("Enemy")]
     [SerializeField] protected EnemyCtrl ctrl;
+    protected float forceAmount = 5.0f;
+
 
     protected virtual void LateUpdate()
     {
@@ -36,7 +38,6 @@ public class EnemyDamageReceiver : DamageReceiver
         if (col != null) col.enabled = true;
 
         this.ctrl.Animator.SetBool("IsAlive", true);
-        this.ctrl.ResetModelRotation();
 
     }
     public override void IsHit()
@@ -53,25 +54,25 @@ public class EnemyDamageReceiver : DamageReceiver
 
     protected virtual void DropItems()
     {
-        //this.DropItem(ItemCode.Gold);
-        //this.DropItem(ItemCode.PlayerExp);
+        this.DropItem(ItemCode.Gold);
+        this.DropItem(ItemCode.PlayerExp);
         ItemCode itemCode = ItemCode.Gold;
         InventoryManager.Instance.AddItem(itemCode, 1);
     }
 
     protected virtual void DropItem(ItemCode itemCode)
     {
-        //ItemDropCtrl prefab = ItemDropSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName(itemCode.ToString());
-        //ItemDropCtrl newItemDrop = ItemDropSpawnerCtrl.Instance.Spawner.Spawn(prefab);
+        ItemDropCtrl prefab = ItemDropSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName(itemCode.ToString());
+        ItemDropCtrl newItemDrop = ItemDropSpawnerCtrl.Instance.Spawner.Spawn(prefab);
 
-        //Vector3 dropPosition = transform.position;
-        //dropPosition.y += 2;
-        //newItemDrop.transform.position = dropPosition;
-        //newItemDrop.SetActive(true);
+        Vector3 dropPosition = transform.position;
+        dropPosition.y += 2;
+        newItemDrop.transform.position = dropPosition;
+        newItemDrop.SetActive(true);
 
-        //Vector3 randomDirection = Random.onUnitSphere;
-        //randomDirection.y = Mathf.Abs(randomDirection.y);
-        //newItemDrop.Rigidbody.AddForce(randomDirection * forceAmount, ForceMode.Impulse);
+        Vector3 randomDirection = Random.onUnitSphere;
+        randomDirection.y = Mathf.Abs(randomDirection.y);
+        newItemDrop.Rigidbody.AddForce(randomDirection * forceAmount, ForceMode.Impulse);
 
     }
     protected virtual void Despawn()

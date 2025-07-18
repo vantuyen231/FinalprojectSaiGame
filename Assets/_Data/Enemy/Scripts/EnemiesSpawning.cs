@@ -33,6 +33,7 @@ public class EnemiesSpawning : SaiBehavior
 
         EnemyCtrl enemyPrefabs = this.ctrl.Spawner.PoolPrefabs.GetByName("Pink");
         EnemyCtrl newEnemy = this.ctrl.Spawner.Spawn(enemyPrefabs);
+        newEnemy.transform.position = transform.position;
         newEnemy.SetActive(true);
     }
 }

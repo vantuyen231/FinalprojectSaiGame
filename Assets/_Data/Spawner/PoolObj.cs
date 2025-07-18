@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class PoolObj : SaiBehavior
 {
+    [Header("PoolObj")]
     [SerializeField] protected DespawnBase despawn;
     public DespawnBase Despawn => despawn;
 
