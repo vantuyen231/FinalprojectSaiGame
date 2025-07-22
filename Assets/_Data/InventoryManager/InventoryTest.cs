@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InventoryTester : SaiBehavior
+public class InventoryTester : SaiBehaviour
 {
     protected override void Start()
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract  class DamageSender : SaiBehavior
+public abstract  class DamageSender : SaiBehaviour
 {
     [SerializeField] protected int damage = 1;
 

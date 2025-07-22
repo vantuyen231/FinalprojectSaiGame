@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponCtrl : SaiBehavior
+public class WeaponCtrl : SaiBehaviour
 {
     [SerializeField] protected FirePoint firePoint;
     public FirePoint FirePoint => firePoint;

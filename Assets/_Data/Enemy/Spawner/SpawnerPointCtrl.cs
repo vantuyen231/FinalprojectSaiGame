@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerPointCtrl : SaiBehavior
+public class SpawnerPointCtrl : SaiBehaviour
 {
     [SerializeField] protected SpawnerPointCtrl spawnpoint;
     public SpawnerPointCtrl Spawnpoint => spawnpoint;

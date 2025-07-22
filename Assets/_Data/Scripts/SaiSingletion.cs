@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-public abstract class SaiSingleton<T> : SaiBehavior where T : SaiBehavior
+public abstract class SaiSingleton<T> : SaiBehaviour where T : SaiBehaviour
 {
     private static T _instance;
 

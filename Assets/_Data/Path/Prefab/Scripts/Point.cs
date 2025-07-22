@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Point : SaiBehavior
+public class Point : SaiBehaviour
 {
     [SerializeField] protected Point nextPoint;
     public Point NextPoint => nextPoint;

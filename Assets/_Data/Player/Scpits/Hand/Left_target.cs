@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Left_target : SaiBehavior
+public class Left_target : SaiBehaviour
 {
     protected override void ResetValue()
     {

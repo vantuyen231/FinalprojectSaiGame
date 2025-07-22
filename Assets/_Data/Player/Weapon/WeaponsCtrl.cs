@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponsCtrl : SaiBehavior
+public class WeaponsCtrl : SaiBehaviour
 {
     [SerializeField] protected List<WeaponCtrl> weapons;
 

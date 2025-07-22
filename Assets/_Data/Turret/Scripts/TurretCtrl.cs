@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretCtrl : SaiBehavior
+public class TurretCtrl : SaiBehaviour
 {
     [SerializeField] protected TurretTargeting turretTargeting;
     public TurretTargeting TurretTargeting => turretTargeting;

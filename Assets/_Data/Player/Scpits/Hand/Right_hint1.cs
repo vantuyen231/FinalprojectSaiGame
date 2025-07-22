@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Right_hint1 : SaiBehavior
+public class Right_hint1 : SaiBehaviour
 {
     protected override void ResetValue()
     {

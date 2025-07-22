@@ -33,7 +33,6 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         base.Reborn(); 
         this.isAlive = true;
-
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = true;
 
@@ -49,21 +48,29 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         base.OnDead();
         this.DropItems();
-        Invoke(nameof(this.Despawn), 12f);
+        Invoke(nameof(this.Despawn), 4f);
     }
 
     protected virtual void DropItems()
     {
         this.DropItem(ItemCode.Gold);
         this.DropItem(ItemCode.PlayerExp);
-        ItemCode itemCode = ItemCode.Gold;
-        InventoryManager.Instance.AddItem(itemCode, 1);
+        //ItemCode itemCode = ItemCode.Gold;
+        //InventoryManager.Instance.AddItem(itemCode, 1);
     }
 
     protected virtual void DropItem(ItemCode itemCode)
     {
-        ItemDropCtrl prefab = ItemDropSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName(itemCode.ToString());
+        string name = itemCode.ToString();
+        ItemDropCtrl prefab = ItemDropSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName(name);
+
+        if (prefab == null)
+        {
+            Debug.LogError(" Khong tim thay prefab voi ten : " + name, this.gameObject);
+            return;
+        }
         ItemDropCtrl newItemDrop = ItemDropSpawnerCtrl.Instance.Spawner.Spawn(prefab);
+
 
         Vector3 dropPosition = transform.position;
         dropPosition.y += 2;

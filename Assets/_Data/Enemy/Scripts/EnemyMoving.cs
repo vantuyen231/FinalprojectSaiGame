@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMoving : SaiBehavior
+public class EnemyMoving : SaiBehaviour
 {
     //[SerializeField] protected Transform targetToMove;
     [SerializeField] protected Point pointToGo;

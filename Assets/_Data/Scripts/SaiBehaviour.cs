@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaiBehavior : MonoBehaviour
+public class SaiBehaviour : MonoBehaviour
 {
     protected virtual void Start()
     {

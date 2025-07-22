@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class AttackAbstract : SaiBehavior
+public abstract class AttackAbstract : SaiBehaviour
 {
     [Header("Abstract")]
     [SerializeField] protected PlayerCtrl playerCtrl;

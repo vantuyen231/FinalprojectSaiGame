@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CrosshairPointer : SaiBehavior
+public class CrosshairPointer : SaiBehaviour
 {
     protected float maxDistance = 100f;
     protected Collider hitObj;

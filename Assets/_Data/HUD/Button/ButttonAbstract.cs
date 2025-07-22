@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class ButttonAbstract : SaiBehavior
+public abstract class ButttonAbstract : SaiBehaviour
 {
     [SerializeField] protected Button button;
 

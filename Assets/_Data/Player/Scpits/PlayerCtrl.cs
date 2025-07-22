@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class PlayerCtrl : SaiBehavior
+public class PlayerCtrl : SaiSingleton<PlayerCtrl>
 {
     [SerializeField] protected WeaponsCtrl weaponsCtrl;
     public WeaponsCtrl WeaponsCtrl => weaponsCtrl;
@@ -21,6 +21,10 @@ public class PlayerCtrl : SaiBehavior
 
     [SerializeField] protected Rig aimingRig;
     public Rig AimingRig => aimingRig;
+
+    [SerializeField] protected PlayerLevel level;
+    public PlayerLevel Level => level;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -29,7 +33,14 @@ public class PlayerCtrl : SaiBehavior
         this.LoadCrosshairPointer();
         this.LoadWeapons();
         this.LoadAimingRig();
-        //this.LoadLevel();
+        this.LoadLevel();
+    }
+
+    protected virtual void LoadLevel()
+    {
+        if (this.level != null) return;
+        this.level = GetComponentInChildren<PlayerLevel>();
+        Debug.Log(transform.name + ": LoadLevel", gameObject);
     }
 
     protected virtual void LoadWeapons()
@@ -76,27 +87,7 @@ public class PlayerCtrl : SaiBehavior
     {
         if (this.aimingRig != null) return;
 
-        Transform model = transform.Find("Model");
-        if (model == null)
-        {
-            Debug.LogError(transform.name + ": Missing Model transform", gameObject);
-            return;
-        }
-
-        Transform aimingRigT = model.Find("AimingRig");
-        if (aimingRigT == null)
-        {
-            Debug.LogError(transform.name + ": Missing AimingRig", gameObject);
-            return;
-        }
-
-        this.aimingRig = aimingRigT.GetComponent<Rig>();
-        if (this.aimingRig == null)
-        {
-            Debug.LogError(transform.name + ": AimingRig component not found", gameObject);
-            return;
-        }
-
+        this.aimingRig = transform.Find("Model").Find("mixamorig1:Hips").Find("AimingRig").GetComponent<Rig>();
         Debug.Log(transform.name + ": LoadAimingRig", gameObject);
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class PlayerAbstract : SaiBehavior
+public abstract class PlayerAbstract : SaiBehaviour
 {
     [Header("Abstract")]
     [SerializeField] protected PlayerCtrl playerCtrl;

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public abstract class SliderAbstact : SaiBehavior
+public abstract class SliderAbstact : SaiBehaviour
 {
     [SerializeField] protected Slider slider;
 

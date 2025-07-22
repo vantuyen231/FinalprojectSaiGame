@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LookAtPlayer : SaiBehavior
+public class LookAtPlayer : SaiBehaviour
 {
     [SerializeField] protected Transform playerCamera;
 

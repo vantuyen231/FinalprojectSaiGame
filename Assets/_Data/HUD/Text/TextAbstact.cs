@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class TextAbstact : SaiBehavior
+public abstract class TextAbstact : SaiBehaviour
 {
     [SerializeField] protected TextMeshProUGUI textPro;
 

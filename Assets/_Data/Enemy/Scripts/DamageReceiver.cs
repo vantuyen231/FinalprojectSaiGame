@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DamageReceiver : SaiBehavior
+public class DamageReceiver : SaiBehaviour
 {
     [Header("Damage Receiver")]
     [SerializeField] protected int currentHp = 10;

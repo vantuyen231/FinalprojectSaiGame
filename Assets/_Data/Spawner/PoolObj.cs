@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class PoolObj : SaiBehavior
+public abstract class PoolObj : SaiBehaviour
 {
     [Header("PoolObj")]
     [SerializeField] protected DespawnBase despawn;

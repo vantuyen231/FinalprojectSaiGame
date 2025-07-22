@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class InventoryCtrl : SaiBehavior
+public abstract class InventoryCtrl : SaiBehaviour
 {
     [SerializeField] protected List<ItemInventory> items = new();
     public List<ItemInventory> Items => items;

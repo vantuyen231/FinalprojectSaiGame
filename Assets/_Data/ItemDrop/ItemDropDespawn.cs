@@ -3,7 +3,7 @@ using UnityEngine;
 public class ItemDropDespawn : DespawnBase
 {
     [SerializeField] protected ItemDropCtrl ctrl;
-    [SerializeField] protected float delay = 7;
+    [SerializeField] protected float delay = 4;
 
     private void OnEnable()
     {

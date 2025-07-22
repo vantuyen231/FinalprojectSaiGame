@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesSpawning : SaiBehavior
+public class EnemiesSpawning : SaiBehaviour
 {
     [SerializeField] protected EnemiesSpawnerCtrl ctrl;
     [SerializeField] protected float timer = 0;
@@ -15,14 +15,14 @@ public class EnemiesSpawning : SaiBehavior
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadSpawner();
+        this.LoadCtrl();
     }
 
-    protected virtual void LoadSpawner()
+    protected virtual void LoadCtrl()
     {
         if (this.ctrl != null) return;
         this.ctrl = transform.GetComponent<EnemiesSpawnerCtrl>();
-        Debug.LogWarning(transform.name + ":EnemiesSpawnerCtrl", gameObject);
+        Debug.Log(transform.name + ":LoadCtrl", gameObject);
     }
 
     protected virtual void Spawning()
