@@ -25,6 +25,8 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
     [SerializeField] protected PlayerLevel level;
     public PlayerLevel Level => level;
 
+
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -70,11 +72,22 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
         this.thirdPersonCamera = GameObject.FindAnyObjectByType<vThirdPersonCamera>();
         this.thirdPersonCamera.rightOffset = 0.6f;
         this.thirdPersonCamera.defaultDistance = 1.2f;
-        this.thirdPersonCamera.height = 1.3f;
+        this.thirdPersonCamera.height = 1.6f;
         this.thirdPersonCamera.yMinLimit = -40f;
         this.thirdPersonCamera.yMaxLimit = 40f;
         Debug.Log(transform.name + ": LoadThirdPersonCamera", gameObject);
     }
+    //protected virtual void LoadThirdPersonCamera()
+    //{
+    //    if (this.thirdPersonCamera != null) return;
+    //    this.thirdPersonCamera = GameObject.FindAnyObjectByType<vThirdPersonCamera>();
+    //    this.thirdPersonCamera.rightOffset = 0.4f;
+    //    this.thirdPersonCamera.defaultDistance = 2.5f;
+    //    this.thirdPersonCamera.height = 1.4f;
+    //    this.thirdPersonCamera.yMinLimit = -40f;
+    //    this.thirdPersonCamera.yMaxLimit = 80f;
+    //    Debug.Log(transform.name + ": LoadThirdPersonCamera", gameObject);
+    //}
 
     //protected virtual void LoadAimingRig()
     //{
@@ -87,7 +100,7 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
     {
         if (this.aimingRig != null) return;
 
-        this.aimingRig = transform.Find("Model").Find("mixamorig1:Hips").Find("AimingRig").GetComponent<Rig>();
+        this.aimingRig = transform.Find("Model").GetComponentInChildren<Rig>();
         Debug.Log(transform.name + ": LoadAimingRig", gameObject);
     }
 }
