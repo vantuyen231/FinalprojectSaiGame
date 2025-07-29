@@ -12,6 +12,7 @@ public class DamageReceiver : SaiBehaviour
     public int MaxHp => maxHp;
 
     [SerializeField] protected bool isAlive = true;
+    [SerializeField] protected Faction receiverFaction;// = Faction.Enemy;
 
     protected virtual void OnEnable()
     {
@@ -30,6 +31,9 @@ public class DamageReceiver : SaiBehaviour
         //damageSender = trigger.GetComponent<DamageSender>();
         //BulletDamageSender damageSender = trigger.GetComponent<BulletDamageSender>();
         if (damageSender == null) return;
+
+        if (damageSender.GetFaction() == this.receiverFaction) return;
+
         damageSender.Despawn();
         this.Deduct(damageSender.GetDamage());
         this.IsHit();

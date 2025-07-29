@@ -19,7 +19,6 @@ public class EnemyCtrl : PoolObj
 
     int currentHp = 10;
     public float weight = 1f;
-    //string enemyName = "";
 
     protected override void Awake()
     {

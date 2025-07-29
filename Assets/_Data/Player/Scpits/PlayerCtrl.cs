@@ -25,6 +25,8 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
     [SerializeField] protected PlayerLevel level;
     public PlayerLevel Level => level;
 
+    [SerializeField] protected PlayerDamageReceiver playerReceiver;
+    public PlayerDamageReceiver PlayerReceiver => playerReceiver;
 
 
     protected override void LoadComponents()
@@ -36,6 +38,7 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
         this.LoadWeapons();
         this.LoadAimingRig();
         this.LoadLevel();
+        this.LoadPlayerDamage();
     }
 
     protected virtual void LoadLevel()
@@ -43,6 +46,13 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
         if (this.level != null) return;
         this.level = GetComponentInChildren<PlayerLevel>();
         Debug.Log(transform.name + ": LoadLevel", gameObject);
+    }
+
+    protected virtual void LoadPlayerDamage()
+    {
+        if (this.playerReceiver != null) return;
+        this.playerReceiver = GetComponentInChildren<PlayerDamageReceiver>();
+        Debug.Log(transform.name + ": LoadPlayerDamage", gameObject);
     }
 
     protected virtual void LoadWeapons()
@@ -77,24 +87,6 @@ public class PlayerCtrl : SaiSingleton<PlayerCtrl>
         this.thirdPersonCamera.yMaxLimit = 40f;
         Debug.Log(transform.name + ": LoadThirdPersonCamera", gameObject);
     }
-    //protected virtual void LoadThirdPersonCamera()
-    //{
-    //    if (this.thirdPersonCamera != null) return;
-    //    this.thirdPersonCamera = GameObject.FindAnyObjectByType<vThirdPersonCamera>();
-    //    this.thirdPersonCamera.rightOffset = 0.4f;
-    //    this.thirdPersonCamera.defaultDistance = 2.5f;
-    //    this.thirdPersonCamera.height = 1.4f;
-    //    this.thirdPersonCamera.yMinLimit = -40f;
-    //    this.thirdPersonCamera.yMaxLimit = 80f;
-    //    Debug.Log(transform.name + ": LoadThirdPersonCamera", gameObject);
-    //}
-
-    //protected virtual void LoadAimingRig()
-    //{
-    //    if (this.aimingRig != null) return;
-    //    this.aimingRig = transform.Find("Model").Find("AimingRig").GetComponent<Rig>();
-    //    Debug.Log(transform.name + ": LoadAimingRig", gameObject);
-    //}
 
     protected virtual void LoadAimingRig()
     {
