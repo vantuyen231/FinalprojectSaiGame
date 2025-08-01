@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurretTargeting : SaiBehaviour
 {
+    [SerializeField] protected TurretCtrl ctrl;
+
     [SerializeField] protected Targetable nearest;
     public Targetable Nearest => nearest;
 
@@ -24,6 +26,19 @@ public class TurretTargeting : SaiBehaviour
         this.RemoveEnemy(other);
     }
 
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoandTurretCtrl();
+    }
+
+    protected virtual void LoandTurretCtrl()
+    {
+        if (this.ctrl != null) return;
+        this.ctrl = transform.parent.GetComponent<TurretCtrl>();
+        Debug.Log(transform.name + ": LoadTurretCtrl", gameObject);
+    }
+
     protected virtual void AddEnemy(Collider other)
     {
         Targetable targetable = other.GetComponent<Targetable>();
@@ -41,6 +56,8 @@ public class TurretTargeting : SaiBehaviour
     {
         float nearestDistance = Mathf.Infinity;
         float enemyDistance;
+
+
         foreach (Targetable target in this.enemies)
         {
             enemyDistance = Vector3.Distance(transform.position, target.transform.position);
@@ -51,6 +68,7 @@ public class TurretTargeting : SaiBehaviour
             }
         }
         if (!this.enemies.Contains(this.nearest)) this.nearest = null;
+
     }
 
 }

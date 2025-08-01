@@ -16,12 +16,16 @@ public class TurretCtrl : SaiBehaviour
 
     public Transform bulletPrefab;
 
+    [SerializeField] protected TurretDamageReceiver turretDamageReceiver;
+    public TurretDamageReceiver TurretDamageReceiver => turretDamageReceiver;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadTurretTargeting();
         this.LoadModel();
         this.LoadFirePoints();
+        this.LoadTurretReceiver();
 
     }
 
@@ -46,5 +50,15 @@ public class TurretCtrl : SaiBehaviour
         FirePoint[] points = transform.GetComponentsInChildren<FirePoint>();
         this.firePoints = new List<FirePoint>(points);
         Debug.Log(transform.name + ": LoadFirePoints", gameObject);
+    }
+
+    protected virtual void LoadTurretReceiver()
+    {
+        if (this.turretDamageReceiver != null)
+        {
+            return;
+        }
+        this.turretDamageReceiver = this.GetComponentInChildren<TurretDamageReceiver>();
+        Debug.LogWarning(transform.name + ":LoadTurretReceiver", gameObject);
     }
 }

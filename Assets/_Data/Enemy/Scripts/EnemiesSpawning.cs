@@ -8,6 +8,8 @@ public class EnemiesSpawning : SaiBehaviour
     [SerializeField] protected float timer = 0;
     [SerializeField] protected float delay = 5;
 
+
+
     protected virtual void FixedUpdate()
     {
         this.Spawning();
@@ -31,9 +33,20 @@ public class EnemiesSpawning : SaiBehaviour
         if (this.timer < this.delay) return;
         this.timer = 0;
 
-        EnemyCtrl enemyPrefabs = this.ctrl.Spawner.PoolPrefabs.GetByName("Pink");
-        EnemyCtrl newEnemy = this.ctrl.Spawner.Spawn(enemyPrefabs);
-        newEnemy.transform.position = transform.position;
+        //EnemyCtrl enemyPrefabs = this.ctrl.Spawner.PoolPrefabs.GetByName("Pink");
+        //EnemyCtrl newEnemy = this.ctrl.Spawner.Spawn(enemyPrefabs);
+        //newEnemy.transform.position = transform.position;
+        //newEnemy.SetActive(true);
+        EnemyCtrl enemyPrefab = this.ctrl.Spawner.PoolPrefabs.GetByName("Pink");
+
+        List<SpawnPoint> spawnPoints = EnemiesSpawnerCtrl.Instance.SpawnPointCtrl.SpawnPoints;
+        if (spawnPoints.Count == 0) return;
+
+        SpawnPoint spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+
+        EnemyCtrl newEnemy = this.ctrl.Spawner.Spawn(enemyPrefab);
+        newEnemy.transform.position = spawnPoint.transform.position;
+        newEnemy.transform.rotation = spawnPoint.transform.rotation; // neu can
         newEnemy.SetActive(true);
     }
 }

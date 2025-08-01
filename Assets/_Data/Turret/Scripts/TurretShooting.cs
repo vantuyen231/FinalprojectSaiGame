@@ -28,6 +28,8 @@ public class TurretShooting : SaiBehaviour
 
     protected virtual void Looking()
     {
+        if (!this.ctrl.TurretDamageReceiver.IsAlive()) return;
+
         if (this.target == null) return;
         Vector3 directionToTarget = this.target.transform.position - this.ctrl.Rotator.position-Vector3.up * 1.0f;
         Vector3 newDirection = Vector3.RotateTowards(
@@ -56,6 +58,8 @@ public class TurretShooting : SaiBehaviour
 
     protected virtual void Shooting()
     {
+        if (!this.ctrl.TurretDamageReceiver.IsAlive()) return;
+
         Invoke(nameof(this.Shooting), this.shootSpeed + Random.Range(-0.1f, 0.1f));
 
         if (this.target == null) return;
@@ -79,5 +83,10 @@ public class TurretShooting : SaiBehaviour
         this.currentFirePoint++;
         if(this.currentFirePoint == this.ctrl.FirePoints.Count) this.currentFirePoint = 0;
         return firePoint;
+    }
+
+    protected virtual void StopShooting()
+    {
+        //if()
     }
 }

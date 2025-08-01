@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamageReceiver : DamageReceiver
+public class TurretDamageReceiver : DamageReceiver
 {
-    [SerializeField] protected PlayerCtrl ctrl;
+    [SerializeField] protected TurretCtrl ctrl;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadPlayerCtrl();
+        this.LoadTurretCtrl();
     }
-    protected virtual void LoadPlayerCtrl()
+    protected virtual void LoadTurretCtrl()
     {
         if (this.ctrl != null) return;
-        this.ctrl = transform.parent.GetComponent<PlayerCtrl>();
-        Debug.LogWarning(transform.name + ": LoadPlayerCtrl", gameObject);
+        this.ctrl = transform.parent.GetComponent<TurretCtrl>();
+        Debug.LogWarning(transform.name + ": LoadEnemyCtrl", gameObject);
     }
 
     protected override void Reborn()
@@ -32,8 +32,7 @@ public class PlayerDamageReceiver : DamageReceiver
     protected override void OnDead()
     {
         base.OnDead();
-        Debug.Log("Player is Dead");
-        PlayerDeadUI.Instance.Show();
-        Time.timeScale = 0f;
+        //this.
+        Debug.Log("Turret is Dead");
     }
 }
