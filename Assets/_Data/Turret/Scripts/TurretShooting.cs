@@ -9,6 +9,8 @@ public class TurretShooting : SaiBehaviour
     [SerializeField] protected float rotationSpeed = 4f;
     [SerializeField] protected float shootSpeed = 1f;
     [SerializeField] protected int currentFirePoint = 0;
+    [SerializeField] protected SoundCode shootSfxName = SoundCode.GunShot;
+
 
     public BulletCtrl bulletPrefab;
 
@@ -75,6 +77,7 @@ public class TurretShooting : SaiBehaviour
         newBullet.transform.rotation = Quaternion.LookRotation(rotarionDirection.normalized);
 
         newBullet.SetActive(true);
+        this.SpawnSound();
     }
 
     protected virtual FirePoint GetFirePoint()
@@ -88,5 +91,12 @@ public class TurretShooting : SaiBehaviour
     protected virtual void StopShooting()
     {
         //if()
+    }
+    protected virtual void SpawnSound()
+    {
+        Vector3 position = transform.position;
+        SFXCtrl newSfx = SoundManager.Instance.CreateSfx(this.shootSfxName);
+        newSfx.transform.position = position;
+        newSfx.gameObject.SetActive(true);
     }
 }

@@ -18,6 +18,7 @@ public class EnemyMoving : SaiBehaviour
     [SerializeField] protected float stopDistance = 2f;
     [SerializeField] protected bool isReachTarget = false;
 
+    [SerializeField] protected SoundCode shootSfxName = SoundCode.WalkALong;
 
 
 
@@ -80,6 +81,7 @@ public class EnemyMoving : SaiBehaviour
             this.ctrl.Agent.SetDestination(postion);
         }
         //this.ctrl.Agent.SetDestination(postion);
+        this.SpawnSound();
     }
 
     protected virtual void UpdateAnimator()
@@ -121,5 +123,13 @@ public class EnemyMoving : SaiBehaviour
     protected virtual void StopMoving()
     {
         this.ctrl.Agent.isStopped = true;
+    }
+
+    protected virtual void SpawnSound()
+    {
+        Vector3 position = transform.position;
+        SFXCtrl newSfx = SoundManager.Instance.CreateSfx(this.shootSfxName);
+        newSfx.transform.position = position;
+        newSfx.gameObject.SetActive(true);
     }
 }

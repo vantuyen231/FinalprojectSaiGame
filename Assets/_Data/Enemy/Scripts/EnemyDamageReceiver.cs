@@ -9,6 +9,7 @@ public class EnemyDamageReceiver : DamageReceiver
     protected float forceAmount = 5.0f;
 
 
+
     protected virtual void LateUpdate()
     {
         this.UpdateDeadAnimation();
@@ -86,4 +87,5 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.ctrl.Despawn.DoDespawn();
     }
+
 }

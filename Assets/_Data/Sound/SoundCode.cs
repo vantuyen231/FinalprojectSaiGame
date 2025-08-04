@@ -6,7 +6,10 @@ public enum SoundCode
 
     LastStand = 1000,
 
+
     LaserKickDrum = 2000,
     LaserOneShoot = 2001,
+    GunShot = 2002,
 
+    WalkALong = 3000,
 }
