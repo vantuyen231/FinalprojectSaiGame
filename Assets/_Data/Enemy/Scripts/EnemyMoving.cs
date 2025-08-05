@@ -18,6 +18,9 @@ public class EnemyMoving : SaiBehaviour
     [SerializeField] protected float stopDistance = 2f;
     [SerializeField] protected bool isReachTarget = false;
 
+    [SerializeField] protected float walkSoundDelay = 0.5f;
+    protected float walkSoundTimer = 0f;
+
     [SerializeField] protected SoundCode shootSfxName = SoundCode.WalkALong;
 
 
@@ -27,6 +30,10 @@ public class EnemyMoving : SaiBehaviour
     {
         this.MoveToTarget();
         this.UpdateAnimator();
+        this.walkSoundTimer += Time.fixedDeltaTime;
+        this.SpawnSound();
+
+
     }
 
     protected override void LoadComponents()
@@ -81,7 +88,6 @@ public class EnemyMoving : SaiBehaviour
             this.ctrl.Agent.SetDestination(postion);
         }
         //this.ctrl.Agent.SetDestination(postion);
-        this.SpawnSound();
     }
 
     protected virtual void UpdateAnimator()
@@ -127,9 +133,16 @@ public class EnemyMoving : SaiBehaviour
 
     protected virtual void SpawnSound()
     {
+
+        if (!this.IsWalking) return; 
+        if (this.walkSoundTimer < this.walkSoundDelay) return;
+
         Vector3 position = transform.position;
         SFXCtrl newSfx = SoundManager.Instance.CreateSfx(this.shootSfxName);
         newSfx.transform.position = position;
         newSfx.gameObject.SetActive(true);
+
+        this.walkSoundTimer = 0f;
+
     }
 }
