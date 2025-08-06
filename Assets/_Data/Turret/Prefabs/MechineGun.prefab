@@ -556,7 +556,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 9
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3890714919841658116
 Rigidbody:
@@ -990,6 +990,7 @@ MonoBehaviour:
   rotationSpeed: 4
   shootSpeed: 1
   currentFirePoint: 0
+  shootSfxName: 2002
   bulletPrefab: {fileID: 0}
 --- !u!1 &7821334299884632879
 GameObject:
