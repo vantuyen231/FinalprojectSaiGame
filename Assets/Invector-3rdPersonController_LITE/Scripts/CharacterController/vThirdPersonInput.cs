@@ -110,6 +110,8 @@ namespace Invector.vCharacterController
             var Y = Input.GetAxis(rotateCameraYInput);
             var X = Input.GetAxis(rotateCameraXInput);
 
+
+
             tpCamera.RotateCamera(X, Y);
         }
 

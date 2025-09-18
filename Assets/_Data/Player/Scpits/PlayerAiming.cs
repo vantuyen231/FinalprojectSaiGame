@@ -4,7 +4,7 @@ public class PlayerAiming : PlayerAbstract
 {
     [Header("Aiming")]
     [SerializeField] protected bool isAlwaysAiming = false;
-    protected float closeLookDistance = 0.6f;
+    protected float closeLookDistance = 0.8f;
     protected float farLookDistance = 1.3f;
 
     private void Update()
@@ -23,6 +23,9 @@ public class PlayerAiming : PlayerAbstract
         this.playerCtrl.ThirdPersonCamera.defaultDistance = this.closeLookDistance;
 
         CrosshairPointer crosshairPointer = this.playerCtrl.CrosshairPointer;
+
+
+
         this.playerCtrl.ThirdPersonController.RotateToPosition(crosshairPointer.transform.position);
         this.playerCtrl.ThirdPersonController.isSprinting = false;
         this.playerCtrl.AimingRig.weight = 1;
